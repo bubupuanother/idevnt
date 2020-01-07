@@ -5,9 +5,7 @@ import { log } from '@/api/actions'
 import { connect } from 'react-redux'
 
 export default @connect(state => {
-	return {
-
-	}
+	return {}
 }, {
 	get: option => {
 		return {
