@@ -5,7 +5,8 @@ import axios from 'axios'
 import cs from 'classnames'
 import './styles.less'
 import { listDate } from "@/api/actions"
-import { Spin } from 'antd' 
+import { Spin } from 'antd'
+import imagesLoaded from 'imagesloaded'
 
 // columnWidth: 200,
 // itemSelector: '.grid-item' // 要布局的网格元素
@@ -29,7 +30,7 @@ export default class extends React.PureComponent {
       hasMore: true, // 是否开启下拉加载
       data: [], // 接受我每次的数据
       count: 0,
-      limit:8,
+      limit: 8,
     }
     // 拿第一次的数据
     this.loadMoreData()
@@ -50,7 +51,7 @@ export default class extends React.PureComponent {
     // page 当前滚动到了第几页
     const { data, count } = this.state
     // 超过200条数据 不继续监听下拉事件
-    
+
     let a = {
       token: localStorage.getItem("quan"),
       limit: this.state.limit,
@@ -59,25 +60,34 @@ export default class extends React.PureComponent {
     // page 是当前请求第几页数据
     // limit 每页我需要返回的数据条数
     listDate(a).then(res => {
-        this.setState({
-          data: res.result.list,
-          count:  res.result.count,
-          limit: this.state.limit+8
-        }, () => {
-          this.advanceWidth()
-        })
+      this.setState({
+        data: res.result.list,
+        count: res.result.count,
+        limit: this.state.limit + 8
+      }, () => {
+        this.img()
       })
+    })
       .catch(err => console.log(err))
+  }
+
+  img = () => {
+
+    const imgone = imagesLoaded(".pages-hoc")
+    imgone.on('always', () => {
+      this.advanceWidth()
+    })
   }
 
   render() {
     const { hasMore } = this.state
 
+
     return (
       <div className="box">
         <InfiniteScroll
-          loader={<div className="loader" key={0}><Spin  />
-          <span>Loading...</span></div>}
+          loader={<div className="loader" key={0}><Spin />
+            <span>Loading...</span></div>}
           initialLoad={false} // 不让它进入直接加载
           pageStart={1} // 设置初始化请求的页数
           loadMore={this.loadMoreData}  // 监听的ajax请求
@@ -91,7 +101,7 @@ export default class extends React.PureComponent {
                   className={cs('d', { d1: key % 2 === 0, d2: key % 2 !== 0 })}
                 >
                   <p>{JSON.parse(dt.info).homeone}</p>
-                  <img src={JSON.parse(dt.info).updatetime} alt=""/>
+                  <img src={JSON.parse(dt.info).updatetime} alt="" />
                 </div>
               ))
             }
