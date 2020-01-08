@@ -12,9 +12,6 @@ export default class extends Component {
 		return (
 			<div id="home">
 				<Head search={this.search} />
-				<section>
-
-				</section>
 			</div>
 		)
 	}
