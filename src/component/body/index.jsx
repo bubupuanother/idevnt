@@ -1,73 +1,11 @@
-// import React, { Component } from 'react'
-// import './styles.less'
-// import { listDate } from "@/api/actions"
-// import Masonry from 'masonry-layout'
-// import InfiniteScroll from 'react-infinite-scroller'
-// import cs from 'classnames'
-
-// export default class extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       data: []
-//     }
-//   }
-
-//   componentDidMount() {
-//     let a = {
-//       token: localStorage.getItem("quan"),
-//       limit: 200,
-//       pages: 1
-//     }
-
-//     //先获取
-//     listDate(a).then(res => {
-//       let data = res.result.list
-//       data.filter(v => {
-//         v.info = JSON.parse(v.info)
-//       })
-//       this.setState({
-//         data: data
-//       })
-//     })
-//   }
-
-//   render() {
-
-//     return (
-//       <div className="box">
-//         <InfiniteScroll
-//           initialLoad={false} // 不让它进入直接加载
-//           pageStart={1} // 设置初始化请求的页数
-//           loadMore={this.loadMoreData}  // 监听的ajax请求
-//           hasMore={hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
-//           useWindow={false} // 不监听 window 滚动条
-//         >
-//           <div className="pages-hoc">
-//             {
-//               this.state.data.map((dt, key) => (
-//                 <div
-//                   key={key}
-//                   className={cs('d', { d1: key % 2 === 0, d2: key % 2 !== 0 })}
-//                 >
-//                 </div>
-//               ))
-//             }
-//           </div>
-//         </InfiniteScroll>
-//       </div>
-//     )
-//   }
-// }
-
-
-
 import React from 'react'
 import Masonry from 'masonry-layout'
 import InfiniteScroll from 'react-infinite-scroller'
 import axios from 'axios'
 import cs from 'classnames'
 import './styles.less'
+import { listDate } from "@/api/actions"
+import { Spin } from 'antd' 
 
 // columnWidth: 200,
 // itemSelector: '.grid-item' // 要布局的网格元素
@@ -91,6 +29,7 @@ export default class extends React.PureComponent {
       hasMore: true, // 是否开启下拉加载
       data: [], // 接受我每次的数据
       count: 0,
+      limit:8,
     }
     // 拿第一次的数据
     this.loadMoreData()
@@ -111,16 +50,19 @@ export default class extends React.PureComponent {
     // page 当前滚动到了第几页
     const { data, count } = this.state
     // 超过200条数据 不继续监听下拉事件
-    if (count && data.length >= count) {
-      return false
+    
+    let a = {
+      token: localStorage.getItem("quan"),
+      limit: this.state.limit,
+      pages: 1
     }
     // page 是当前请求第几页数据
     // limit 每页我需要返回的数据条数
-    axios.post('/api/Home/Apis/listWithPage', { data: { page, limit: 10 } })
-      .then(res => {
+    listDate(a).then(res => {
         this.setState({
-          data: [...data, ...res.data.result.list],
-          count: res.count,
+          data: res.result.list,
+          count:  res.result.count,
+          limit: this.state.limit+8
         }, () => {
           this.advanceWidth()
         })
@@ -134,11 +76,12 @@ export default class extends React.PureComponent {
     return (
       <div className="box">
         <InfiniteScroll
+          loader={<div className="loader" key={0}><Spin  />
+          <span>Loading...</span></div>}
           initialLoad={false} // 不让它进入直接加载
           pageStart={1} // 设置初始化请求的页数
           loadMore={this.loadMoreData}  // 监听的ajax请求
-          hasMore={hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
-          useWindow={false} // 不监听 window 滚动条
+          hasMore={true} // 是否继续监听滚动事件 true 监听 | false 不再监听
         >
           <div className="pages-hoc">
             {
@@ -147,6 +90,8 @@ export default class extends React.PureComponent {
                   key={key}
                   className={cs('d', { d1: key % 2 === 0, d2: key % 2 !== 0 })}
                 >
+                  <p>{JSON.parse(dt.info).homeone}</p>
+                  <img src={JSON.parse(dt.info).updatetime} alt=""/>
                 </div>
               ))
             }
