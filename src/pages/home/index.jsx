@@ -10,6 +10,7 @@ export default class extends Component {
 				<PageHeader
 					style={{
 						border: '1px solid rgb(235, 237, 240)',
+						padding: '0',
 					}}
 					subTitle={<Head />}
 				/>
