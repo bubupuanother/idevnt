@@ -8,3 +8,6 @@ export function reg(data) {
 export function log(data) {
 	return post(api.log, qs.stringify(data))
 }
+export function listDate(data) {
+	return post(api.list, qs.stringify(data))
+}
