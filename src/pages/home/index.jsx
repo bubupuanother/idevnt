@@ -3,10 +3,15 @@ import "./styles.less";
 import Head from '@/component/head'
 
 export default class extends Component {
+
+	search = (v) => {
+		console.log(v)
+	}
+
 	render() {
 		return (
 			<div>
-				<Head />
+				<Head search={this.search} />
 			</div>
 		)
 	}
