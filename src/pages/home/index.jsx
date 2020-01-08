@@ -1,13 +1,19 @@
-import React, { Component } from 'react'
-import "./styles.less"
-// import { Icon, Menu } from "antd"
-// import { Switch, Route, Link } from 'react-router-dom'
-// import loadable from '@/utils/loader'
+import React, { Component } from 'react';
+import "./styles.less";
+import { PageHeader } from 'antd';
+import Head from '@/component/head'
 
 export default class extends Component {
 	render() {
 		return (
-			<div>123</div>
+			<div>
+				<PageHeader
+					style={{
+						border: '1px solid rgb(235, 237, 240)',
+					}}
+					subTitle={<Head />}
+				/>
+			</div>
 		)
 	}
 }
