@@ -10,8 +10,11 @@ export default class extends Component {
 
 	render() {
 		return (
-			<div>
+			<div id="home">
 				<Head search={this.search} />
+				<section>
+
+				</section>
 			</div>
 		)
 	}
