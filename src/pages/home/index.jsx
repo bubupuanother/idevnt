@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./styles.less";
 import loadable from "@/utils/loader"
 import { Menu, Icon } from 'antd';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 const { SubMenu } = Menu;
 const Head = loadable(() => import("@/component/head"))
 const Body = loadable(() => import("@/component/body"))

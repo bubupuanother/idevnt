@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Masonry from 'masonry-layout'
 import InfiniteScroll from 'react-infinite-scroller'
 import cs from 'classnames'
@@ -17,6 +17,7 @@ export default class extends React.Component {
       data: [], // 接受我每次的数据
       count: 0,
       limit: 8,
+      className: [, ,]
     }
     // 拿第一次的数据
     this.loadMoreData()
@@ -65,9 +66,49 @@ export default class extends React.Component {
     })
   }
 
+  new = () => {
+    const { data } = this.state
+    this.setState({
+      className: ['span', ,],
+      data: data.sort((a, b) => {
+        return b.createtime - a.createtime
+      })
+    })
+    this.img()
+  }
+
+  hot = () => {
+    const { data } = this.state
+
+    this.setState({
+      className: [, 'span',],
+      data: data.sort((a, b) => {
+        return JSON.parse(b.info).leases - JSON.parse(a.info).leases
+      })
+    })
+    this.img()
+  }
+  like = () => {
+    const { data } = this.state
+
+    this.setState({
+      className: [, , 'span'],
+      data: data.sort((a, b) => {
+        return JSON.parse(b.info).building - JSON.parse(a.info).building
+      })
+    })
+    this.img()
+  }
+
   render() {
     return (
       <div className="box">
+        <div className="paix">
+          <p>排序:</p>
+          <span className={this.state.className[0]} onClick={this.new}>最新</span>
+          <span className={this.state.className[1]} onClick={this.hot}>最热</span>
+          <span className={this.state.className[2]} onClick={this.like}>喜欢</span>
+        </div>
         <InfiniteScroll
           loader={<div className="loader" key={0}><Spin />
             <span>Loading...</span></div>}
