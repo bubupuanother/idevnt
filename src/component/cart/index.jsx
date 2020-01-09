@@ -21,7 +21,10 @@ export default class extends React.Component {
 					<span><Icon type="share-alt" />{JSON.parse(data.info).status}</span>
 				</p>
 				<p>{JSON.parse(data.info).dataTime}</p>
-				<a><Icon type="eye" />{JSON.parse(data.info).url}</a>
+				<p>
+					<Icon type="eye" />
+					<b>{JSON.parse(data.info).url}</b>
+				</p>
 			</div>
 		)
 	}

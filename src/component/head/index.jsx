@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './styles.less'
-import { Input } from 'antd';
+import { Input } from 'antd'
 
-const { Search } = Input;
+const { Search } = Input
 
 export default class extends Component {
   render() {

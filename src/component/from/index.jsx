@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './styles.less'
+<<<<<<< HEAD
 import { DatePicker, Select } from 'antd';
 import { connect } from 'react-redux'
 
@@ -61,6 +62,37 @@ class extends Component {
 
   render() {
     const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+=======
+import { DatePicker, Select } from 'antd'
+
+export default class extends Component {
+  onChange = (date, dateString) => {
+    // console.log(date, dateString)
+  }
+  onChange1 = (date, dateString) => {
+    // console.log(date, dateString)
+  }
+  handleChange = (value) => {
+    // console.log(`selected ${value}`)
+  }
+
+  disabledStartDate = startValue => {
+    console.log(startValue)
+    // const { endValue } = this.state
+    // if (!startValue || !endValue) {
+    //   return false
+    // }
+    // return startValue.valueOf() > endValue.valueOf()
+  }
+
+  render() {
+    // const { MonthPicker, RangePicker, WeekPicker } = DatePicker
+    const { Option } = Select
+    const children = []
+    for (let i = 10; i < 36; i++) {
+      children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
+    }
+>>>>>>> 1e74b26ee4b268157f24057c02d77d7ca362e54c
     return (
       <div className="from_box">
         <div className="from_body">
