@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Masonry from 'masonry-layout'
 import InfiniteScroll from 'react-infinite-scroller'
 import cs from 'classnames'
