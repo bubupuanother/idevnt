@@ -1,28 +1,14 @@
 import React from 'react'
 import Masonry from 'masonry-layout'
 import InfiniteScroll from 'react-infinite-scroller'
-import axios from 'axios'
 import cs from 'classnames'
-import './styles.less'
 import { listDate } from "@/api/actions"
 import { Spin } from 'antd'
 import imagesLoaded from 'imagesloaded'
+import Cart from '@/component/cart'
+import './styles.less'
 
-// columnWidth: 200,
-// itemSelector: '.grid-item' // 要布局的网格元素
-// gutter: 10 // 网格间水平方向边距，垂直方向边距使用css的margin-bottom设置
-// percentPosition: true // 使用columnWidth对应元素的百分比尺寸
-// stamp:'.grid-stamp' // 网格中的固定元素，不会因重新布局改变位置，移动元素填充到固定元素下方
-// fitWidth: true // 设置网格容器宽度等于网格宽度，这样配合css的auto margin实现居中显示
-// originLeft: true // 默认true网格左对齐，设为false变为右对齐
-// originTop: true // 默认true网格对齐顶部，设为false对齐底部
-// containerStyle: { position: 'relative' } // 设置容器样式
-// transitionDuration: '0.8s' // 改变位置或变为显示后，重布局变换的持续时间，时间格式为css的时间格式
-// stagger: '0.03s' // 重布局时网格并不是一起变换的，排在后面的网格比前一个延迟开始，该项设置延迟时间  
-// resize:  false // 改变窗口大小将不会影响布局
-// initLayout: true // 初始化布局，设未true可手动初试化布局
-
-export default class extends React.PureComponent {
+export default class extends React.Component {
   constructor(props) {
     super(props)
 
@@ -49,7 +35,7 @@ export default class extends React.PureComponent {
   // 加载更多数据
   loadMoreData = (page = 1) => {
     // page 当前滚动到了第几页
-    const { data, count } = this.state
+    // const { data, count } = this.state
     // 超过200条数据 不继续监听下拉事件
 
     let a = {
@@ -80,9 +66,6 @@ export default class extends React.PureComponent {
   }
 
   render() {
-    const { hasMore } = this.state
-
-
     return (
       <div className="box">
         <InfiniteScroll
@@ -95,15 +78,15 @@ export default class extends React.PureComponent {
         >
           <div className="pages-hoc">
             {
-              this.state.data.map((dt, key) => (
-                <div
-                  key={key}
-                  className={cs('d', { d1: key % 2 === 0, d2: key % 2 !== 0 })}
-                >
-                  <p>{JSON.parse(dt.info).homeone}</p>
-                  <img src={JSON.parse(dt.info).updatetime} alt="" />
-                </div>
-              ))
+              this.state.data.map((v, i) => {
+                return (
+                  <Cart
+                    key={i}
+                    data={v}
+                    className={cs('d', { v: i % 2 === 0, v: i % 2 !== 0 })}
+                  />
+                )
+              })
             }
           </div>
         </InfiniteScroll>
