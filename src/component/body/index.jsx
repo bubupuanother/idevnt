@@ -18,7 +18,7 @@ export default class extends React.Component {
       data: [], // 接受我每次的数据
       count: 0,
       limit: 8,
-      className: [null, null, null]
+      className: ['', '', '']
     }
     // 拿第一次的数据
     this.loadMoreData()
@@ -69,7 +69,7 @@ export default class extends React.Component {
   new = () => {
     const { data } = this.state
     this.setState({
-      className: ['span', ,],
+      className: ['span', '', ''],
       data: data.sort((a, b) => {
         return b.createtime - a.createtime
       })
@@ -81,7 +81,7 @@ export default class extends React.Component {
     const { data } = this.state
 
     this.setState({
-      className: [, 'span',],
+      className: ['', 'span', ''],
       data: data.sort((a, b) => {
         return JSON.parse(b.info).leases - JSON.parse(a.info).leases
       })
@@ -92,7 +92,7 @@ export default class extends React.Component {
     const { data } = this.state
 
     this.setState({
-      className: [, , 'span'],
+      className: ['', '', 'span'],
       data: data.sort((a, b) => {
         return JSON.parse(b.info).building - JSON.parse(a.info).building
       })
@@ -125,7 +125,7 @@ export default class extends React.Component {
                   <Cart
                     key={i}
                     data={v}
-                    className={cs('d', { v: i % 2 === 0, v: i % 2 !== 0 })}
+                    className={cs('d', { v: i % 2 !== 0 })}
                   />
                 )
               })
