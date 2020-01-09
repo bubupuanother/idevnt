@@ -6,13 +6,10 @@ import { listDate } from "@/api/actions"
 import { Spin } from 'antd'
 import imagesLoaded from 'imagesloaded'
 import Cart from '@/component/cart'
+import From from '@/component/from'
 import './styles.less'
 
-<<<<<<< HEAD
-export default class extends React.PureComponent {
-=======
 export default class extends React.Component {
->>>>>>> 709a1435a3825c775e87b6fb54d32461acae4406
   constructor(props) {
     super(props)
 
@@ -69,10 +66,6 @@ export default class extends React.Component {
     })
   }
 
-<<<<<<< HEAD
-  render() {
-    const { hasMore } = this.state
-=======
   new = () => {
     const { data } = this.state
     this.setState({
@@ -108,9 +101,9 @@ export default class extends React.Component {
   }
 
   render() {
->>>>>>> 709a1435a3825c775e87b6fb54d32461acae4406
     return (
       <div className="box">
+        <From />
         <div className="paix">
           <p>排序:</p>
           <span className={this.state.className[0]} onClick={this.new}>最新</span>
@@ -127,18 +120,6 @@ export default class extends React.Component {
         >
           <div className="pages-hoc">
             {
-<<<<<<< HEAD
-              this.state.data.map((dt, key) => (
-                console.log(JSON.parse(dt.info))
-                // <div
-                //   key={key}
-                //   className={cs('d', { d1: key % 2 === 0, d2: key % 2 !== 0 })}
-                // >
-                //   <p>{JSON.parse(dt.info).homeone}</p>
-                //   <img src={JSON.parse(dt.info).updatetime} alt="" />
-                // </div>
-              ))
-=======
               this.state.data.map((v, i) => {
                 return (
                   <Cart
@@ -148,7 +129,6 @@ export default class extends React.Component {
                   />
                 )
               })
->>>>>>> 709a1435a3825c775e87b6fb54d32461acae4406
             }
           </div>
         </InfiniteScroll>
