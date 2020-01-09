@@ -18,7 +18,7 @@ export default class extends React.Component {
       data: [], // 接受我每次的数据
       count: 0,
       limit: 8,
-      className: [, ,]
+      className: [null, null, null]
     }
     // 拿第一次的数据
     this.loadMoreData()

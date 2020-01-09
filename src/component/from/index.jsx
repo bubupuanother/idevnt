@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import './styles.less'
 import { DatePicker, Select } from 'antd';
 
-const { Option } = Select;
-
 export default class extends Component {
   onChange = (date, dateString) => {
     // console.log(date, dateString);
@@ -25,7 +23,7 @@ export default class extends Component {
   };
 
   render() {
-    const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+    // const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
     const { Option } = Select;
     const children = [];
     for (let i = 10; i < 36; i++) {
