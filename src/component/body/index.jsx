@@ -59,7 +59,6 @@ export default class extends React.Component {
   }
 
   img = () => {
-
     const imgone = imagesLoaded(".pages-hoc")
     imgone.on('always', () => {
       this.advanceWidth()
