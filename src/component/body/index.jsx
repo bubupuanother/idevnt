@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Masonry from 'masonry-layout'
 import InfiniteScroll from 'react-infinite-scroller'
 import axios from 'axios'
@@ -22,7 +22,7 @@ import imagesLoaded from 'imagesloaded'
 // resize:  false // 改变窗口大小将不会影响布局
 // initLayout: true // 初始化布局，设未true可手动初试化布局
 
-export default class extends React.PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props)
 
