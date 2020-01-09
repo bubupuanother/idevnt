@@ -28,7 +28,7 @@ export default class extends React.Component {
     // new Masonry(节点, 配置)
     new Masonry(document.querySelector('.pages-hoc'), {
       itemSelector: '.d', // 要布局的网格元素
-      columnWidth: 200,  // 获取节点 可以自动计算每列的宽度
+      columnWidth: 350,  // 获取节点 可以自动计算每列的宽度
       fitWidth: true, // 设置网格容器宽度等于网格宽度
       gutter: 20,
     })
