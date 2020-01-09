@@ -11,3 +11,6 @@ export function log(data) {
 export function listDate(data) {
 	return post(api.list, qs.stringify(data))
 }
+export function addset(data) {
+	return post(api.addset, qs.stringify(data))
+}

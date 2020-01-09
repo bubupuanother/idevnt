@@ -1,14 +1,18 @@
 import React from 'react'
 import Masonry from 'masonry-layout'
 import InfiniteScroll from 'react-infinite-scroller'
-import axios from 'axios'
 import cs from 'classnames'
-import './styles.less'
 import { listDate } from "@/api/actions"
 import { Spin } from 'antd'
 import imagesLoaded from 'imagesloaded'
+import Cart from '@/component/cart'
+import './styles.less'
 
+<<<<<<< HEAD
 export default class extends React.PureComponent {
+=======
+export default class extends React.Component {
+>>>>>>> 709a1435a3825c775e87b6fb54d32461acae4406
   constructor(props) {
     super(props)
 
@@ -17,6 +21,7 @@ export default class extends React.PureComponent {
       data: [], // 接受我每次的数据
       count: 0,
       limit: 8,
+      className: [, ,]
     }
     // 拿第一次的数据
     this.loadMoreData()
@@ -35,7 +40,7 @@ export default class extends React.PureComponent {
   // 加载更多数据
   loadMoreData = (page = 1) => {
     // page 当前滚动到了第几页
-    const { data, count } = this.state
+    // const { data, count } = this.state
     // 超过200条数据 不继续监听下拉事件
 
     let a = {
@@ -58,17 +63,60 @@ export default class extends React.PureComponent {
   }
 
   img = () => {
-
     const imgone = imagesLoaded(".pages-hoc")
     imgone.on('always', () => {
       this.advanceWidth()
     })
   }
 
+<<<<<<< HEAD
   render() {
     const { hasMore } = this.state
+=======
+  new = () => {
+    const { data } = this.state
+    this.setState({
+      className: ['span', ,],
+      data: data.sort((a, b) => {
+        return b.createtime - a.createtime
+      })
+    })
+    this.img()
+  }
+
+  hot = () => {
+    const { data } = this.state
+
+    this.setState({
+      className: [, 'span',],
+      data: data.sort((a, b) => {
+        return JSON.parse(b.info).leases - JSON.parse(a.info).leases
+      })
+    })
+    this.img()
+  }
+  like = () => {
+    const { data } = this.state
+
+    this.setState({
+      className: [, , 'span'],
+      data: data.sort((a, b) => {
+        return JSON.parse(b.info).building - JSON.parse(a.info).building
+      })
+    })
+    this.img()
+  }
+
+  render() {
+>>>>>>> 709a1435a3825c775e87b6fb54d32461acae4406
     return (
       <div className="box">
+        <div className="paix">
+          <p>排序:</p>
+          <span className={this.state.className[0]} onClick={this.new}>最新</span>
+          <span className={this.state.className[1]} onClick={this.hot}>最热</span>
+          <span className={this.state.className[2]} onClick={this.like}>喜欢</span>
+        </div>
         <InfiniteScroll
           loader={<div className="loader" key={0}><Spin />
             <span>Loading...</span></div>}
@@ -79,6 +127,7 @@ export default class extends React.PureComponent {
         >
           <div className="pages-hoc">
             {
+<<<<<<< HEAD
               this.state.data.map((dt, key) => (
                 console.log(JSON.parse(dt.info))
                 // <div
@@ -89,6 +138,17 @@ export default class extends React.PureComponent {
                 //   <img src={JSON.parse(dt.info).updatetime} alt="" />
                 // </div>
               ))
+=======
+              this.state.data.map((v, i) => {
+                return (
+                  <Cart
+                    key={i}
+                    data={v}
+                    className={cs('d', { v: i % 2 === 0, v: i % 2 !== 0 })}
+                  />
+                )
+              })
+>>>>>>> 709a1435a3825c775e87b6fb54d32461acae4406
             }
           </div>
         </InfiniteScroll>
