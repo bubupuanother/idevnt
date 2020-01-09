@@ -11,16 +11,16 @@ const persistConfig = {
 	stateReconciler: autoMergeLevel2
 }
 const data = combineReducers({
-	user: rdc.User,
+	user: persistReducer(
+		persistConfig,
+		rdc.User
+	),
+	data: rdc.Get,
 })
 const windowRedux = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const Hotdata = persistReducer(
-	persistConfig,
-	data
-)
 const store = createStore(
-	Hotdata,
+	data,
 	windowRedux(applyMiddleware(promise, thunk))
 )
 export { store }

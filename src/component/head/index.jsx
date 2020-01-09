@@ -23,7 +23,7 @@ export default class extends Component {
           />
         </div>
         <div className="head_2">
-          用户名：<span>{JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).name}</span>
+          用户名：<span>{JSON.parse(localStorage.getItem('persist:root')).userName}</span>
         </div>
       </div>
     )

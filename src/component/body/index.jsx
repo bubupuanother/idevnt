@@ -8,8 +8,14 @@ import imagesLoaded from 'imagesloaded'
 import Cart from '@/component/cart'
 import From from '@/component/from'
 import './styles.less'
+import { connect } from 'react-redux'
 
-export default class extends React.Component {
+export default @connect(state => {
+  return {
+    datalist: state
+  }
+})
+class extends React.Component {
   constructor(props) {
     super(props)
 
@@ -35,28 +41,71 @@ export default class extends React.Component {
   }
 
   // 加载更多数据
+  componentWillReceiveProps(a) {
+    let arr = a.datalist.data.data1
+    let as = {
+      token: localStorage.getItem("quan"),
+      limit: 200,
+      pages: 1
+    }
+    listDate(as).then(res => {
+      const data = res.result.list
+      let newarr = []
+      let sum=[arr.yu.length,arr.lei.length,arr.wei.length].sort((a,b)=>{
+        return a-b
+      })
+      sum=sum[sum.length-1]
+      console.log(sum)
+      data.filter(v => {
+        for(let i=0;i<sum;i++)
+        {
+          
+        }
+      })
+      // arr.yu.filter(f => {
+      //   if(f === JSON.parse(v.info).language){
+      //     newarr.push(v)
+      //   }
+      // })
+      // arr.wei.map(a => {
+      //   if(a === JSON.parse(v.info).child){
+      //     newarr.push(v)
+      //   }
+      // })
+      // arr.lei.map(m => {
+      //   if(m === JSON.parse(v.info).usd){
+      //     newarr.push(v)
+      //   }
+      // })
+      console.log(newarr)
+    })
+  }
   loadMoreData = (page = 1) => {
     // page 当前滚动到了第几页
     // const { data, count } = this.state
     // 超过200条数据 不继续监听下拉事件
 
-    let a = {
-      token: localStorage.getItem("quan"),
-      limit: this.state.limit,
-      pages: 1
-    }
-    // page 是当前请求第几页数据
-    // limit 每页我需要返回的数据条数
-    listDate(a).then(res => {
-      this.setState({
-        data: res.result.list,
-        count: res.result.count,
-        limit: this.state.limit + 8
-      }, () => {
-        this.img()
+    if (this.props.datalist.data.data1.length != 0) {
+      console.log(1)
+    } else {
+      let a = {
+        token: localStorage.getItem("quan"),
+        limit: this.state.limit,
+        pages: 1
+      }
+      // page 是当前请求第几页数据
+      // limit 每页我需要返回的数据条数
+      listDate(a).then(res => {
+        this.setState({
+          data: res.result.list,
+          count: res.result.count,
+          limit: this.state.limit + 8
+        }, () => {
+          this.img()
+        })
       })
-    })
-      .catch(err => console.log(err))
+        .catch(err => console.log(err))
+    }
   }
 
   img = () => {
@@ -103,7 +152,7 @@ export default class extends React.Component {
   render() {
     return (
       <div className="box">
-        <From />
+        <From {...this.props} />
         <div className="paix">
           <p>排序:</p>
           <span className={this.state.className[0]} onClick={this.new}>最新</span>
