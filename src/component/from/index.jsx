@@ -36,40 +36,40 @@ export default class extends Component {
         <div className="from_body">
           <div className="body_1">
             搜索位置：<span>页名</span><span>广告地址</span><span>广告文本</span><span>货币名字</span>
-            </div>
+          </div>
           <div className="body_2">
             图片格式：<span className="image_lei">单个图片</span><span className="image_lei">轮播图片</span>
-            </div>
+          </div>
           <div className="body_3">
-            <p className="body_left">第一次见到日期：
-              <DatePicker 
-                disabledDate={this.disabledStartDate} 
-                onChange={this.onChange} 
+            <div className="body_left">第一次见到日期：
+              <DatePicker
+                disabledDate={this.disabledStartDate}
+                onChange={this.onChange}
               />
-            </p>
-            <p className="body_right">最后一条次见到日期：<DatePicker onChange={this.onChange1} /></p>
+            </div>
+            <div className="body_right">最后一条次见到日期：<DatePicker onChange={this.onChange1} /></div>
           </div>
           <div className="body_4">
             <div className="asd">溢价搜索：</div>
-            <p>
+            <div>
               <Select mode="tags" style={{ width: '100%' }} placeholder="地理位置" onChange={this.handleChange}>
                 {children}
               </Select>
-            </p>
-            <p>
+            </div>
+            <div>
               <Select mode="tags" style={{ width: '100%' }} placeholder="语言" onChange={this.handleChange}>
                 {children}
               </Select>
-            </p>
-            <p>
+            </div>
+            <div>
               <Select mode="tags" style={{ width: '100%' }} placeholder="广告类型" onChange={this.handleChange}>
                 {children}
               </Select>
-            </p>
+            </div>
           </div>
           <div className="body_4">
             <div className="asd">搜查：</div>
-            
+
           </div>
         </div>
       </div>
