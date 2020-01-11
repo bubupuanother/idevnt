@@ -41,48 +41,6 @@ class extends React.Component {
     })
   }
 
-<<<<<<< HEAD
-  // 加载更多数据
-  componentWillReceiveProps(a) {
-    let arr = a.datalist.data.data1
-    let as = {
-      token: localStorage.getItem("quan"),
-      limit: 200,
-      pages: 1
-    }
-    listDate(as).then(res => {
-      const data = res.result.list
-      let newarr = []
-      let sum = [arr.yu.length, arr.lei.length, arr.wei.length].sort((a, b) => {
-        return a - b
-      })
-      sum = sum[sum.length - 1]
-      console.log(sum)
-      data.filter(v => {
-        for (let i = 0; i < sum; i++) {
-
-        }
-      })
-      // arr.yu.filter(f => {
-      //   if(f === JSON.parse(v.info).language){
-      //     newarr.push(v)
-      //   }
-      // })
-      // arr.wei.map(a => {
-      //   if(a === JSON.parse(v.info).child){
-      //     newarr.push(v)
-      //   }
-      // })
-      // arr.lei.map(m => {
-      //   if(m === JSON.parse(v.info).usd){
-      //     newarr.push(v)
-      //   }
-      // })
-      console.log(newarr)
-    })
-  }
-=======
->>>>>>> 974b73d4905bb14af952c6fa78d21ac7be1f1b8e
   loadMoreData = (page = 1) => {
     // page 当前滚动到了第几页
     // const { data, count } = this.state
@@ -154,7 +112,7 @@ class extends React.Component {
     this.setState({
       data1: a.datalist.filterdata.filterdata,
       data: a.datalist.filterdata.filterdata,
-    },()=>{
+    }, () => {
       this.img()
     })
   }
