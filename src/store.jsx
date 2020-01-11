@@ -16,6 +16,7 @@ const data = combineReducers({
 		rdc.User
 	),
 	data: rdc.Get,
+	filterdata: rdc.Filterdata,
 })
 const windowRedux = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

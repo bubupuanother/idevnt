@@ -1,98 +1,199 @@
 import React, { Component } from 'react'
 import './styles.less'
-<<<<<<< HEAD
 import { DatePicker, Select } from 'antd';
 import { connect } from 'react-redux'
-
+import { listDate } from "@/api/actions"
 const { Option } = Select;
 
 export default @connect(state => {
   return {
-
+    filterdata1: state
   }
-},{
+}, {
   getdata: (v) => {
     return {
-      type:'DATAONE',
+      type: 'DATAONE',
+      payload: v
+    }
+  },
+  filterdata: (v) => {
+    return {
+      type: "FILTER",
       payload: v
     }
   }
 })
 class extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      data : [],
-      data1 : [],
-      data2 : [],
-     
+      language: [],
+      child: [],
+      usd: [],
+      styleimg: "",
+      firstTime: "",
+      lastTime: ""
     }
   }
-
-
-  getlist(){
-    let arr={
-      yu:this.state.data,
-      wei:this.state.data1,
-      lei:this.state.data2,
+  listdata = []
+  getlist(v) {
+    let a = {
+      token: localStorage.getItem("quan"),
+      limit: 200,
+      pages: 1
     }
-    this.props.getdata(arr)
+    listDate(a).then(res => {
+      let data = res.result.list
+      if (typeof v == "string") {
+        let a = ""
+        for (let value in this.state) {
+          if (this.state[value] == v) {
+            a = value
+          }
+        }
+        this.fengzhuang1(a, v, data, "dan")
+      } else {
+        let a = ""
+        for (let value in this.state) {
+          if (typeof this.state[value] != "string") {
+            if (this.state[value].length != 0) {
+              let sum = 0
+              this.state[value].filter((i, k) => {
+                if (i == v[k]) {
+                  sum++
+                }
+              })
+              if (sum == this.state[value].length) {
+                a = value
+                break;
+              }
+            }
+          }
+        }
+        this.fengzhuang1(a, v, data, "duo")
+      }
+
+    })
+  }
+  fengzhuang1(name, key, data, stylei) {
+    let list = this.listdata
+    if (list.length == 0) {
+      if (stylei == "dan") {
+        let arr = []
+        data.filter(v => {
+          if (JSON.parse(v.info)[name] == key) {
+            arr.push(v)
+          }
+        })
+        this.listdata = arr
+        this.props.filterdata(arr)
+      } else {
+        let arr = []
+        key.filter(v => {
+          data.filter(j => {
+            if (JSON.parse(j.info)[name] == v) {
+              arr.push(j)
+            }
+          })
+        })
+        this.listdata = arr
+        this.props.filterdata(arr)
+      }
+    } else {
+      if (stylei == "dan") {
+        let arr = []
+        data.filter(v => {
+          if (JSON.parse(v.info)[name] == key) {
+            arr.push(v)
+          }
+        })
+        this.listdata = arr
+        this.props.filterdata(arr)
+      } else {
+        let sum = 0
+        let num = 0
+        for (let value in this.state) {
+          if (typeof this.state[value] != "string") {
+            if (this.state[value].length != 0) {
+              sum++
+              let j = this.state[value].length
+              let k = 0
+              this.state[value].filter((a, b) => {
+                if (a == key[b]) {
+                  k++
+                }
+              })
+              if (j == k) {
+                num++
+              }
+            }
+          }
+        }
+        if (sum == num) {
+          let arr = []
+          let arr1 = this.listdata
+          key.filter(v => {
+            data.filter(j => {
+              if (JSON.parse(j.info)[name] == v) {
+                arr.push(j)
+              }
+            })
+          })
+          let aone = [...arr, ...arr1]
+          aone.filter(v => {
+            aone.filter((k, i) => {
+              if (JSON.parse(v.info).id == JSON.parse(k.info).id) {
+                aone.splice(i, 1)
+              }
+            })
+          })
+          this.listdata = arr
+          this.props.filterdata(arr)
+        } else {
+          let arr = []
+          let arr1 = this.listdata
+          key.filter(v => {
+            arr1.filter(j => {
+              if (JSON.parse(j.info)[name] == v) {
+                arr.push(j)
+              }
+            })
+          })
+          this.props.filterdata(arr)
+        }
+      }
+    }
   }
   handleChange1 = (v) => {
     this.setState({
-      data: v
+      language: v
     }, () => {
-      this.getlist()
+      this.getlist(v)
     })
   }
   handleChange2 = (v) => {
     this.setState({
-      data1: v
+      child: v
     }, () => {
-      this.getlist()
+      this.getlist(v)
     })
   }
   handleChange3 = (v) => {
     this.setState({
-      data2: v
+      usd: v
     }, () => {
-      this.getlist()
+      this.getlist(v)
     })
   }
-
+  styleimgset = (v) => {
+    this.setState({
+      styleimg: v
+    }, () => {
+      this.getlist(v)
+    })
+  }
   render() {
     const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
-=======
-import { DatePicker, Select } from 'antd'
-
-export default class extends Component {
-  onChange = (date, dateString) => {
-    // console.log(date, dateString)
-  }
-  onChange1 = (date, dateString) => {
-    // console.log(date, dateString)
-  }
-  handleChange = (value) => {
-    // console.log(`selected ${value}`)
-  }
-
-  disabledStartDate = startValue => {
-    console.log(startValue)
-    // const { endValue } = this.state
-    // if (!startValue || !endValue) {
-    //   return false
-    // }
-    // return startValue.valueOf() > endValue.valueOf()
-  }
-
-  render() {
-    // const { MonthPicker, RangePicker, WeekPicker } = DatePicker
-    const { Option } = Select
-    const children = []
-    for (let i = 10; i < 36; i++) {
-      children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
-    }
->>>>>>> 1e74b26ee4b268157f24057c02d77d7ca362e54c
     return (
       <div className="from_box">
         <div className="from_body">
@@ -100,7 +201,7 @@ export default class extends Component {
             搜索位置：<span>页名</span><span>广告地址</span><span>广告文本</span><span>货币名字</span>
           </div>
           <div className="body_2">
-            图片格式：<span className="image_lei">单个图片</span><span className="image_lei">轮播图片</span>
+            图片格式：<span className="image_lei" onClick={() => this.styleimgset("image")}>单个图片</span><span className="image_lei" onClick={() => this.styleimgset("video")}>轮播图片</span>
           </div>
           <div className="body_3">
             <div className="body_left">第一次见到日期：
@@ -134,7 +235,7 @@ export default class extends Component {
           </div>
           <div className="body_4">
             <div className="asd">搜查：</div>
-            
+
           </div>
         </div>
       </div>

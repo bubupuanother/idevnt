@@ -24,7 +24,8 @@ class extends React.Component {
       data: [], // 接受我每次的数据
       count: 0,
       limit: 8,
-      className: [, ,]
+      className: [, ,],
+      data1: []
     }
     // 拿第一次的数据
     this.loadMoreData()
@@ -40,53 +41,12 @@ class extends React.Component {
     })
   }
 
-  // 加载更多数据
-  componentWillReceiveProps(a) {
-    let arr = a.datalist.data.data1
-    let as = {
-      token: localStorage.getItem("quan"),
-      limit: 200,
-      pages: 1
-    }
-    listDate(as).then(res => {
-      const data = res.result.list
-      let newarr = []
-      let sum=[arr.yu.length,arr.lei.length,arr.wei.length].sort((a,b)=>{
-        return a-b
-      })
-      sum=sum[sum.length-1]
-      console.log(sum)
-      data.filter(v => {
-        for(let i=0;i<sum;i++)
-        {
-          
-        }
-      })
-      // arr.yu.filter(f => {
-      //   if(f === JSON.parse(v.info).language){
-      //     newarr.push(v)
-      //   }
-      // })
-      // arr.wei.map(a => {
-      //   if(a === JSON.parse(v.info).child){
-      //     newarr.push(v)
-      //   }
-      // })
-      // arr.lei.map(m => {
-      //   if(m === JSON.parse(v.info).usd){
-      //     newarr.push(v)
-      //   }
-      // })
-      console.log(newarr)
-    })
-  }
   loadMoreData = (page = 1) => {
     // page 当前滚动到了第几页
     // const { data, count } = this.state
     // 超过200条数据 不继续监听下拉事件
-
-    if (this.props.datalist.data.data1.length != 0) {
-      console.log(1)
+    if (this.state.data1.length != 0) {
+      this.img()
     } else {
       let a = {
         token: localStorage.getItem("quan"),
@@ -106,6 +66,7 @@ class extends React.Component {
       })
         .catch(err => console.log(err))
     }
+
   }
 
   img = () => {
@@ -128,7 +89,6 @@ class extends React.Component {
 
   hot = () => {
     const { data } = this.state
-
     this.setState({
       className: [, 'span',],
       data: data.sort((a, b) => {
@@ -148,7 +108,14 @@ class extends React.Component {
     })
     this.img()
   }
-
+  componentWillReceiveProps(a) {
+    this.setState({
+      data1: a.datalist.filterdata.filterdata,
+      data: a.datalist.filterdata.filterdata,
+    },()=>{
+      this.img()
+    })
+  }
   render() {
     return (
       <div className="box">
