@@ -24,7 +24,8 @@ class extends React.Component {
       data: [], // 接受我每次的数据
       count: 0,
       limit: 8,
-      className: [, ,]
+      className: [, ,],
+      data1: []
     }
     // 拿第一次的数据
     this.loadMoreData()
@@ -40,6 +41,7 @@ class extends React.Component {
     })
   }
 
+<<<<<<< HEAD
   // 加载更多数据
   componentWillReceiveProps(a) {
     let arr = a.datalist.data.data1
@@ -79,13 +81,14 @@ class extends React.Component {
       console.log(newarr)
     })
   }
+=======
+>>>>>>> 974b73d4905bb14af952c6fa78d21ac7be1f1b8e
   loadMoreData = (page = 1) => {
     // page 当前滚动到了第几页
     // const { data, count } = this.state
     // 超过200条数据 不继续监听下拉事件
-
-    if (this.props.datalist.data.data1.length != 0) {
-      console.log(1)
+    if (this.state.data1.length != 0) {
+      this.img()
     } else {
       let a = {
         token: localStorage.getItem("quan"),
@@ -105,6 +108,7 @@ class extends React.Component {
       })
         .catch(err => console.log(err))
     }
+
   }
 
   img = () => {
@@ -127,7 +131,6 @@ class extends React.Component {
 
   hot = () => {
     const { data } = this.state
-
     this.setState({
       className: [, 'span',],
       data: data.sort((a, b) => {
@@ -147,7 +150,14 @@ class extends React.Component {
     })
     this.img()
   }
-
+  componentWillReceiveProps(a) {
+    this.setState({
+      data1: a.datalist.filterdata.filterdata,
+      data: a.datalist.filterdata.filterdata,
+    },()=>{
+      this.img()
+    })
+  }
   render() {
     return (
       <div className="box">
