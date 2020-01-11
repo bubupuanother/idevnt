@@ -1,68 +1,5 @@
 import React, { Component } from 'react'
 import './styles.less'
-<<<<<<< HEAD
-import { DatePicker, Select } from 'antd';
-import { connect } from 'react-redux'
-
-const { Option } = Select;
-
-export default @connect(state => {
-  return {
-
-  }
-},{
-  getdata: (v) => {
-    return {
-      type:'DATAONE',
-      payload: v
-    }
-  }
-})
-class extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      data : [],
-      data1 : [],
-      data2 : [],
-     
-    }
-  }
-
-
-  getlist(){
-    let arr={
-      yu:this.state.data,
-      wei:this.state.data1,
-      lei:this.state.data2,
-    }
-    this.props.getdata(arr)
-  }
-  handleChange1 = (v) => {
-    this.setState({
-      data: v
-    }, () => {
-      this.getlist()
-    })
-  }
-  handleChange2 = (v) => {
-    this.setState({
-      data1: v
-    }, () => {
-      this.getlist()
-    })
-  }
-  handleChange3 = (v) => {
-    this.setState({
-      data2: v
-    }, () => {
-      this.getlist()
-    })
-  }
-
-  render() {
-    const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
-=======
 import { DatePicker, Select } from 'antd'
 
 export default class extends Component {
@@ -92,7 +29,6 @@ export default class extends Component {
     for (let i = 10; i < 36; i++) {
       children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
     }
->>>>>>> 1e74b26ee4b268157f24057c02d77d7ca362e54c
     return (
       <div className="from_box">
         <div className="from_body">

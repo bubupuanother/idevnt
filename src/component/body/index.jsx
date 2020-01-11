@@ -51,15 +51,14 @@ class extends React.Component {
     listDate(as).then(res => {
       const data = res.result.list
       let newarr = []
-      let sum=[arr.yu.length,arr.lei.length,arr.wei.length].sort((a,b)=>{
-        return a-b
+      let sum = [arr.yu.length, arr.lei.length, arr.wei.length].sort((a, b) => {
+        return a - b
       })
-      sum=sum[sum.length-1]
+      sum = sum[sum.length - 1]
       console.log(sum)
       data.filter(v => {
-        for(let i=0;i<sum;i++)
-        {
-          
+        for (let i = 0; i < sum; i++) {
+
         }
       })
       // arr.yu.filter(f => {
