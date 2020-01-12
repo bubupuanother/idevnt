@@ -1,27 +1,27 @@
-import React from 'react';
-import {Form, Select, Input, DatePicker, Upload, message, Button, Icon} from 'antd';
+import React from 'react'
+import { Form, Select, Input, DatePicker, Upload, message, Button, Icon } from 'antd'
 import './styles.less'
 import axios from "axios"
 import qs from "qs"
 import { addset } from "@/api/actions"
 
-const { Option } = Select;
+const { Option } = Select
 function getBase64(img, callback) {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
+    const reader = new FileReader()
+    reader.addEventListener('load', () => callback(reader.result))
+    reader.readAsDataURL(img)
 }
 
 function beforeUpload(file) {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
     if (!isJpgOrPng) {
-        message.error('You can only upload JPG/PNG file!');
+        message.error('You can only upload JPG/PNG file!')
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const isLt2M = file.size / 1024 / 1024 < 2
     if (!isLt2M) {
-        message.error('Image must smaller than 2MB!');
+        message.error('Image must smaller than 2MB!')
     }
-    return isJpgOrPng && isLt2M;
+    return isJpgOrPng && isLt2M
 }
 export default
 @Form.create({ name: 'validate_other' })
@@ -35,8 +35,8 @@ class extends React.Component {
     }
     handleChange = info => {
         if (info.file.status === 'uploading') {
-            this.setState({ loading: true });
-            return;
+            this.setState({ loading: true })
+            return
         }
         if (info.file.status === 'done') {
             // Get this url from response in real world.
@@ -45,20 +45,20 @@ class extends React.Component {
                     imageUrl,
                     loading: false,
                 }),
-            );
+            )
         }
-    };
+    }
     handleSubmit = e => {
-        e.preventDefault();
+        e.preventDefault()
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                let a={
-                    file:this.state.imageUrl,
-                    type:"post"
+                let a = {
+                    file: this.state.imageUrl,
+                    type: "post"
                 }
-                axios.post("/api/Home/Apis/upload",qs.stringify(a)).then(res=>{
-                    let url="http:"+res.data.result
-                    values.dragger=url
+                axios.post("/api/Home/Apis/upload", qs.stringify(a)).then(res => {
+                    let url = "http:" + res.data.result
+                    values.dragger = url
                     const obj = {
                         updatetime: values.dragger,
                         address: values.address,
@@ -70,35 +70,35 @@ class extends React.Component {
                         status: "30",
                         dataTime: "2020.01.08~2020.01.08",
                         url: "www.baidu.com",
-                        firstTime:"2019-12-01",
-                        lastTime:"2019-12-28",
+                        firstTime: "2019-12-01",
+                        lastTime: "2019-12-28",
                         styleimg: values.styleimg,
-                        language:values.language,
-                        child:values.child,
-                        usd:values.usd,
-                        like:0
+                        language: values.language,
+                        child: values.child,
+                        usd: values.usd,
+                        like: 0
                     }
-    
-                    let a={
-                        token:localStorage.getItem("quan"),
-                        info:obj
+
+                    let a = {
+                        token: localStorage.getItem("quan"),
+                        info: obj
                     }
                     addset(a).then(res => {
                         console.log(res)
                     })
-                   
+
                 })
-                
+
             }
 
-        });
+        })
     }
 
     normFile = e => {
         if (Array.isArray(e)) {
-            return e;
+            return e
         }
-        return e && e.fileList;
+        return e && e.fileList
     }
 
     uploadone = (v) => {
@@ -106,42 +106,36 @@ class extends React.Component {
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator } = this.props.form
         const formItemLayout = {
             labelCol: { span: 6 },
             wrapperCol: { span: 14 },
-        };
+        }
         const config = {
             rules: [
-                { 
-                    type: 'object', 
-                    required: true, 
+                {
+                    type: 'object',
+                    required: true,
                     message: '请输入开始时间!'
                 }
             ],
-        };
+        }
         const configs = {
             rules: [
-                { 
-                    type: 'object', 
-                    required: true, 
+                {
+                    type: 'object',
+                    required: true,
                     message: '请输入结束时间!'
                 }
             ],
-        };
-        const props = {
-            name: 'file',
-            onChange(info) {
-                console.log(info.file)
-            },
-        };
+        }
         const uploadButton = (
             <div>
                 <Icon type={this.state.loading ? 'loading' : 'plus'} />
                 <div className="ant-upload-text">Upload</div>
             </div>
-        );
-        const { imageUrl } = this.state;
+        )
+        const { imageUrl } = this.state
         return (
             <div className="adult" >
                 <div className="box">
@@ -151,9 +145,9 @@ class extends React.Component {
                         <Form.Item label="标题">
                             {getFieldDecorator('Door', {
                                 rules: [
-                                    { 
-                                        required: true, 
-                                        message: '请输入标题!' 
+                                    {
+                                        required: true,
+                                        message: '请输入标题!'
                                     }
                                 ],
                             })(
@@ -165,9 +159,9 @@ class extends React.Component {
                         <Form.Item label="描述">
                             {getFieldDecorator('homesize', {
                                 rules: [
-                                    { 
-                                        required: true, 
-                                        message: '请输入描述!' 
+                                    {
+                                        required: true,
+                                        message: '请输入描述!'
                                     }
                                 ],
                             })(
@@ -179,9 +173,9 @@ class extends React.Component {
                         <Form.Item label="注释">
                             {getFieldDecorator('address', {
                                 rules: [
-                                    { 
-                                        required: true, 
-                                        message: '请输入注释!' 
+                                    {
+                                        required: true,
+                                        message: '请输入注释!'
                                     }
                                 ],
                             })(
@@ -193,9 +187,9 @@ class extends React.Component {
                         <Form.Item label="图片类型">
                             {getFieldDecorator('styleimg', {
                                 rules: [
-                                    { 
-                                        required: true, 
-                                        message: '请选择图片类型!' 
+                                    {
+                                        required: true,
+                                        message: '请选择图片类型!'
                                     }
                                 ],
                             })(
@@ -220,9 +214,9 @@ class extends React.Component {
                         <Form.Item label="语言">
                             {getFieldDecorator('language', {
                                 rules: [
-                                    { 
-                                        required: true, 
-                                        message: '请选择语言!' 
+                                    {
+                                        required: true,
+                                        message: '请选择语言!'
                                     },
                                 ],
                             })(
@@ -237,9 +231,9 @@ class extends React.Component {
                         <Form.Item label="地理位置">
                             {getFieldDecorator('child', {
                                 rules: [
-                                    { 
-                                        required: true, 
-                                        message: '请选择地理位置!' 
+                                    {
+                                        required: true,
+                                        message: '请选择地理位置!'
                                     },
                                 ],
                             })(
@@ -255,9 +249,9 @@ class extends React.Component {
                         <Form.Item label="广告类型">
                             {getFieldDecorator('usd', {
                                 rules: [
-                                    { 
-                                        required: true, 
-                                        message: '请选择广告类型!' 
+                                    {
+                                        required: true,
+                                        message: '请选择广告类型!'
                                     },
                                 ],
                             })(
