@@ -52,34 +52,43 @@ class extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log(values)
-                const obj = {
-                    updatetime: values.updatetime,
-                    address: values.address,
-                    homeone: "巴基斯坦特种兵",
-                    homesize: values.homesize,
-                    Door: values.Door,
-                    building: "30",
-                    leases: "30",
-                    status: "30",
-                    dataTime: "2020.01.08~2020.01.08",
-                    url: "www.baidu.com",
-                    firstTime:"2019-12-01",
-                    lastTime:"2019-12-28",
-                    styleimg: values.styleimg,
-                    language:values.language,
-                    child:values.child,
-                    usd:values.usd,
-                    like:0
-                }
-
                 let a={
-                    token:localStorage.getItem("quan"),
-                    info:obj
+                    file:this.state.imageUrl,
+                    type:"post"
                 }
-                addset(a).then(res => {
-                    console.log(res)
+                axios.post("/api/Home/Apis/upload",qs.stringify(a)).then(res=>{
+                    let url="http:"+res.data.result
+                    values.dragger=url
+                    const obj = {
+                        updatetime: values.dragger,
+                        address: values.address,
+                        homeone: "巴基斯坦特种兵",
+                        homesize: values.homesize,
+                        Door: values.Door,
+                        building: "30",
+                        leases: "30",
+                        status: "30",
+                        dataTime: "2020.01.08~2020.01.08",
+                        url: "www.baidu.com",
+                        firstTime:"2019-12-01",
+                        lastTime:"2019-12-28",
+                        styleimg: values.styleimg,
+                        language:values.language,
+                        child:values.child,
+                        usd:values.usd,
+                        like:0
+                    }
+    
+                    let a={
+                        token:localStorage.getItem("quan"),
+                        info:obj
+                    }
+                    addset(a).then(res => {
+                        console.log(res)
+                    })
+                   
                 })
+                
             }
 
         });
