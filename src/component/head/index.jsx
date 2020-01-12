@@ -5,14 +5,18 @@ import { Input } from 'antd'
 const { Search } = Input
 
 export default class extends Component {
+  
+  add = () => {
+    this.props.history.push('./add')
+  }
+
   render() {
     return (
       <div className="head">
         <img src="image/1.png" alt="" />
         <div className="head_1">
-          <p>Home</p>
-          <p>Offer</p>
-          <p className="asd">Ad Samples</p>
+          <p onClick={this.add}>添加</p>
+          <p>列表</p>
         </div>
         <div className="val">
           <Search

@@ -15,7 +15,7 @@ export default class extends Component {
 	render() {
 		return (
 			<div id="home">
-				<Head search={this.search} />
+				<Head {...this.props} search={this.search} />
 				<div className="home-nav">
 					<Menu
 						className="ul"
