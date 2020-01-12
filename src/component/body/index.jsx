@@ -418,6 +418,25 @@ class extends React.Component {
       data: a.datalist.filterdata.filterdata,
     }, () => {
       this.img()
+      if (this.state.data1.length == 0) {
+        let a = {
+          token: localStorage.getItem("quan"),
+          limit: 16,
+          pages: 1
+        }
+        // page 是当前请求第几页数据
+        // limit 每页我需要返回的数据条数
+        listDate(a).then(res => {
+          this.setState({
+            data: res.result.list,
+          }, () => {
+            this.img()
+          })
+        })
+          .catch(err => console.log(err))
+      }else{
+            this.img()
+      }
     })
   }
   render() {
@@ -436,7 +455,7 @@ class extends React.Component {
           initialLoad={false} // 不让它进入直接加载
           pageStart={1} // 设置初始化请求的页数
           loadMore={this.loadMoreData}  // 监听的ajax请求
-          hasMore={true} // 是否继续监听滚动事件 true 监听 | false 不再监听
+          hasMore={this.state.hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
         >
           <div className="pages-hoc">
             {

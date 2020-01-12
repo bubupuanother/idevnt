@@ -1,11 +1,18 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { Icon } from 'antd'
 
-export default class extends React.Component {
+class Cart extends React.Component {
+
+	goDetials = (v) => {
+		localStorage.setItem('data', JSON.stringify(this.props.data))
+		this.props.history.push('/home/details');
+	}
+
 	render() {
 		const { data, className } = this.props
 		return (
-			<div className={className}>
+			<div className={className} onClick={() => { this.goDetials(data) }}>
 				<h1>{JSON.parse(data.info).Door}</h1>
 				<p>{JSON.parse(data.info).homesize}</p>
 				<img
@@ -29,3 +36,5 @@ export default class extends React.Component {
 		)
 	}
 }
+
+export default withRouter(Cart)

@@ -7,6 +7,7 @@ const Head = loadable(() => import("@/component/head"))
 const Body = loadable(() => import("@/component/body"))
 const Native = loadable(() => import("@/component/native"))
 const Adult = loadable(() => import("@/component/adult"))
+const Details = loadable(() => import("@/component/details"))
 
 export default class extends Component {
 	search = (v) => {
@@ -27,6 +28,7 @@ export default class extends Component {
 					</Menu>
 				</div>
 				<Switch>
+					<Route path="/home/details" component={Details} />
 					<Route path="/home/native" component={Native} />
 					<Route path="/home/adult" component={Adult} />
 					<Route path="/home/" component={Body} />
