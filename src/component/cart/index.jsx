@@ -9,7 +9,6 @@ class Cart extends React.Component {
 		this.props.history.push('/home/details');
 	}
 	like = (v) => {
-		console.log("1111")
 		let b = v
 		let c = JSON.parse(b.info)
 		if (c.like == 1) {
@@ -17,6 +16,7 @@ class Cart extends React.Component {
 		} else {
 			c.like = 1
 		}
+		c.id=b.id
 		let a = {
 			token: localStorage.getItem("quan"),
 			info:c
