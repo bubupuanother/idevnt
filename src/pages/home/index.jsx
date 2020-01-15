@@ -8,13 +8,27 @@ export default class extends Component {
 		console.log(v)
 	}
 	render() {
+		let styledata = ['1']
+		const dis = this.props.location.pathname
+		console.log(dis)
+		switch (dis) {
+			case '/home/native':
+				styledata = ['2']
+				break;
+			case '/home/':
+				styledata = ['1']
+				break;
+			case '/home/adult':
+				styledata = ['3']
+				break;
+		}
 		return (
 			<div id="home">
 				<Head {...this.props} search={this.search} />
 				<div className="home-nav">
 					<Menu
 						className="ul"
-						defaultSelectedKeys={['1']}
+						defaultSelectedKeys={styledata}
 					>
 						<Menu.Item key="1"> <Link to="/home/">Facebook</Link> </Menu.Item>
 						<Menu.Item key="2"> <Link to="/home/native">Native</Link>	</Menu.Item>
