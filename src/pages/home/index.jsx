@@ -5,22 +5,21 @@ import { Switch, Route, Link } from 'react-router-dom'
 import { Head, Body, Native, Adult, Details } from "@/utils/routersLoader"
 export default class extends Component {
 	search = (v) => {
-		console.log(v)
+
 	}
 	render() {
 		let styledata = ['1']
 		const dis = this.props.location.pathname
-		console.log(dis)
 		switch (dis) {
 			case '/home/native':
 				styledata = ['2']
-				break;
+				break
 			case '/home/':
 				styledata = ['1']
-				break;
+				break
 			case '/home/adult':
 				styledata = ['3']
-				break;
+				break
 		}
 		return (
 			<div id="home">
@@ -37,8 +36,8 @@ export default class extends Component {
 				</div>
 				<Switch>
 					<Route path="/home/details" component={Details} />
-					<Route path="/home/native" component={Native} />
-					<Route path="/home/adult" component={Adult} />
+					<Route path="/home/native" component={Body} />
+					<Route path="/home/adult" component={Body} />
 					<Route path="/home/" component={Body} />
 				</Switch>
 			</div>

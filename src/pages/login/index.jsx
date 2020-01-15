@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './styles.less'
-import { Form, Icon, Input, Button, message } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd'
 import { log } from '@/api/actions'
 import { connect } from 'react-redux'
 

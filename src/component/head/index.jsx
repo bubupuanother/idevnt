@@ -5,7 +5,7 @@ import { Input } from 'antd'
 const { Search } = Input
 
 export default class extends Component {
-  
+
   add = () => {
     this.props.history.push('/add')
   }

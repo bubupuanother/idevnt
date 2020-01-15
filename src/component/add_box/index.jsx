@@ -58,10 +58,9 @@ class extends React.Component {
                 }
                 axios.post("/api/Home/Apis/upload", qs.stringify(a)).then(res => {
                     let url = "http:" + res.data.result
-                    if(values.styleimg=='video')
-                    {
-                        values.dragger = [url,url]
-                    }else{
+                    if (values.styleimg == 'video') {
+                        values.dragger = [url, url]
+                    } else {
                         values.dragger = [url]
                     }
                     const obj = {
@@ -89,11 +88,10 @@ class extends React.Component {
                         info: obj
                     }
                     addset(a).then(res => {
-                        if(res.code==200)
-                        {
+                        if (res.code == 200) {
                             message.success("添加成功")
                             this.props.history.push("/home")
-                        }else{
+                        } else {
                             message.error("添加失败")
                         }
                     })

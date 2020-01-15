@@ -133,7 +133,7 @@ class extends React.Component {
       }
     })
   }
-  setStateone=()=>{
+  setStateone = () => {
     if (this.state.data1.length == 0) {
       let a = {
         token: localStorage.getItem("quan"),
@@ -152,8 +152,8 @@ class extends React.Component {
         })
       })
         .catch(err => console.log(err))
-    }else{
-      
+    } else {
+
     }
   }
   render() {

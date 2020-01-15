@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './styles.less'
-import { DatePicker, Select } from 'antd';
+import { DatePicker, Select } from 'antd'
 import { connect } from 'react-redux'
 import { listDate } from "@/api/actions"
-const { Option } = Select;
+const { Option } = Select
 
 export default @connect(state => {
   return {
@@ -66,7 +66,7 @@ class extends Component {
               })
               if (sum === this.state[value].length) {
                 a = value
-                break;
+                break
               }
             }
           }

@@ -6,7 +6,7 @@ import { addset } from "@/api/actions"
 class Cart extends React.Component {
 	goDetials = (v) => {
 		localStorage.setItem('data', JSON.stringify(this.props.data))
-		this.props.history.push('/home/details');
+		this.props.history.push('/home/details')
 	}
 	like = (v) => {
 		let b = v
@@ -16,16 +16,16 @@ class Cart extends React.Component {
 		} else {
 			c.like = 1
 		}
-		c.id=b.id
+		c.id = b.id
 		let a = {
 			token: localStorage.getItem("quan"),
-			info:c
+			info: c
 		}
-		addset(a).then(res=>{
+		addset(a).then(res => {
 			this.props.setstatedata()
 		})
 	}
-	componentDidMount(){
+	componentDidMount() {
 
 	}
 	render() {
