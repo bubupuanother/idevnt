@@ -17,10 +17,10 @@ class extends Component {
 				}
 				reg(obj).then(res => {
 					if (res.code === 200) {
-						message.info('注册成功')
+						message.success('注册成功')
 						this.props.history.push('/login')
 					} else {
-						message.info('注册失败')
+						message.error('注册失败')
 					}
 				})
 			}

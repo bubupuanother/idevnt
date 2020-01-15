@@ -26,7 +26,7 @@ class Cart extends React.Component {
 		})
 	}
 	componentDidMount(){
-		console.log(JSON.parse(this.props.data.info).like)
+
 	}
 	render() {
 		const { data, className } = this.props

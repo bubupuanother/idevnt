@@ -44,10 +44,10 @@ class extends Component {
     }
     listDate(a).then(res => {
       let data = res.result.list
-      if (typeof v == "string") {
+      if (typeof v === "string") {
         let a = ""
         for (let value in this.state) {
-          if (this.state[value] == v) {
+          if (this.state[value] === v) {
             a = value
           }
         }
@@ -55,15 +55,16 @@ class extends Component {
       } else {
         let a = ""
         for (let value in this.state) {
-          if (typeof this.state[value] != "string") {
-            if (this.state[value].length != 0) {
+          if (typeof this.state[value] !== "string") {
+            if (this.state[value].length !== 0) {
               let sum = 0
               this.state[value].filter((i, k) => {
-                if (i == v[k]) {
+                if (i === v[k]) {
                   sum++
                 }
+                return true
               })
-              if (sum == this.state[value].length) {
+              if (sum === this.state[value].length) {
                 a = value
                 break;
               }
@@ -77,13 +78,14 @@ class extends Component {
   }
   fengzhuang1(name, key, data, stylei) {
     let list = this.listdata
-    if (list.length == 0) {
-      if (stylei == "dan") {
+    if (list.length === 0) {
+      if (stylei === "dan") {
         let arr = []
         data.filter(v => {
-          if (JSON.parse(v.info)[name] == key) {
+          if (JSON.parse(v.info)[name] === key) {
             arr.push(v)
           }
+          return true
         })
         this.listdata = arr
         this.props.filterdata(arr)
@@ -91,21 +93,24 @@ class extends Component {
         let arr = []
         key.filter(v => {
           data.filter(j => {
-            if (JSON.parse(j.info)[name] == v) {
+            if (JSON.parse(j.info)[name] === v) {
               arr.push(j)
             }
+            return true
           })
+          return true
         })
         this.listdata = arr
         this.props.filterdata(arr)
       }
     } else {
-      if (stylei == "dan") {
+      if (stylei === "dan") {
         let arr = []
         data.filter(v => {
-          if (JSON.parse(v.info)[name] == key) {
+          if (JSON.parse(v.info)[name] === key) {
             arr.push(v)
           }
+          return true
         })
         this.listdata = arr
         this.props.filterdata(arr)
@@ -113,39 +118,44 @@ class extends Component {
         let sum = 0
         let num = 0
         for (let value in this.state) {
-          if (typeof this.state[value] != "string") {
-            if (this.state[value].length != 0) {
+          if (typeof this.state[value] !== "string") {
+            if (this.state[value].length !== 0) {
               sum++
               let j = this.state[value].length
               let k = 0
               this.state[value].filter((a, b) => {
-                if (a == key[b]) {
+                if (a === key[b]) {
                   k++
                 }
+                return true
               })
-              if (j == k) {
+              if (j === k) {
                 num++
               }
             }
           }
         }
-        if (sum == num) {
+        if (sum === num) {
           let arr = []
           let arr1 = this.listdata
           key.filter(v => {
             data.filter(j => {
-              if (JSON.parse(j.info)[name] == v) {
+              if (JSON.parse(j.info)[name] === v) {
                 arr.push(j)
               }
+              return true
             })
+            return true
           })
           let aone = [...arr, ...arr1]
           aone.filter(v => {
             aone.filter((k, i) => {
-              if (JSON.parse(v.info).id == JSON.parse(k.info).id) {
+              if (JSON.parse(v.info).id === JSON.parse(k.info).id) {
                 aone.splice(i, 1)
               }
+              return true
             })
+            return true
           })
           this.listdata = arr
           this.props.filterdata(arr)
@@ -154,10 +164,12 @@ class extends Component {
           let arr1 = this.listdata
           key.filter(v => {
             arr1.filter(j => {
-              if (JSON.parse(j.info)[name] == v) {
+              if (JSON.parse(j.info)[name] === v) {
                 arr.push(j)
               }
+              return true
             })
+            return true
           })
           this.props.filterdata(arr)
         }
@@ -193,7 +205,6 @@ class extends Component {
     })
   }
   render() {
-    const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
     return (
       <div className="from_box">
         <div className="from_body">

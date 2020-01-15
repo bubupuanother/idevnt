@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import './styless.less'
 import { Input } from 'antd'
-import loadable from "@/utils/loader"
-
-const Add = loadable(() => import("@/component/add_box"))
-
+import { Addone } from "@/utils/routersLoader"
 const { Search } = Input
-
 export default class extends Component {
   table = () => {
     this.props.history.push('./home')
   }
-
   render() {
     return (
       <div>
@@ -33,7 +28,7 @@ export default class extends Component {
             用户名：<span>{JSON.parse(localStorage.getItem('persist:root')).userName}</span>
           </div>
         </div>
-        <Add />
+        <Addone {...this.props} />
       </div>
     )
   }

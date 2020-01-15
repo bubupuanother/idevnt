@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
 import "./styles.less"
-import loadable from "@/utils/loader"
 import { Menu } from 'antd'
 import { Switch, Route, Link } from 'react-router-dom'
-const Head = loadable(() => import("@/component/head"))
-const Body = loadable(() => import("@/component/body"))
-const Native = loadable(() => import("@/component/native"))
-const Adult = loadable(() => import("@/component/adult"))
-const Details = loadable(() => import("@/component/details"))
-
+import { Head, Body, Native, Adult, Details } from "@/utils/routersLoader"
 export default class extends Component {
 	search = (v) => {
 		console.log(v)
